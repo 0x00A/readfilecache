@@ -5,6 +5,9 @@ var fs = require('fs')
 var f = __dirname + '/test.js'
 var l = console.log
 
+l('Assert that a file can be read sync.')
+var file = cache.readFileSync(f)
+
 cache.readFile(f, function(err, data, stat) {
 
 	l('Assert file data is returned.')

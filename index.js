@@ -9,17 +9,25 @@ var readFileCache = module.exports = function readFileCache() {
 
 readFileCache.prototype.readFile = function stat(path, cb) {
   var that = this
-  return fs.stat(path, function(err, stat) {
+  fs.stat(path, function(err, stat) {
     if (err) return cb(err)
     var f = that.cache[path]
     if (!f || !f.mtime || stat.mtime > f.mtime) {
       that.cache[path] = { mtime: stat.mtime, stat: stat }
-      that.fetch(path, cb)
+      return that.fetch(path, cb)
     } 
-    else {
-      that.get(path, cb)
-    }
+    that.get(path, cb)
   })
+}
+
+readFileCache.prototype.readFileSync = function stat(path) {
+  var stat = fs.statSync(path)
+  var f = this.cache[path]
+  if (!f || !f.mtime || stat.mtime > f.mtime) {
+    this.cache[path] = { mtime: stat.mtime, stat: stat }
+    return this.fetchSync(path)
+  } 
+  return this.getSync(path)
 }
 
 readFileCache.prototype.fetch = function fetch(path, enc, cb) {
@@ -35,9 +43,19 @@ readFileCache.prototype.fetch = function fetch(path, enc, cb) {
   })
 }
 
+readFileCache.prototype.fetchSync = function fetch(path, enc) {
+  var data = fs.readFileSync(path, enc || 'utf8')
+  this.cache[path].data = data
+  return this.getSync(path)
+}
+
 readFileCache.prototype.get = function get(path, cb) {
   var f = this.cache[path]
   return cb(null, f.data, f.stat)
+}
+
+readFileCache.prototype.getSync = function get(path) {
+  return this.cache[path].data
 }
 
 readFileCache.prototype.invalidate = function() {
