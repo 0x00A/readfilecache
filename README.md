@@ -15,7 +15,7 @@ var cache = require('reafilecache')()
 //
 
 cache.readFile(filename, function(err, data, stat) {
-  // returns the data from the file and the stat info
+  // err or null, the data from the file and the stat info
 })
 
 //
