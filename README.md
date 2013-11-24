@@ -15,13 +15,13 @@ var cache = require('reafilecache')()
 //
 
 cache.readFile(filename, function(err, data, stat) {
-  //returns the data from the file and the stat info
+  // returns the data from the file and the stat info
 })
 
 //
 // supports a sync api as well
 //
-cache.readFileSync(filename)
+cache.readFileSync(filename) // returns the file
 
 //
 // clear the cache
