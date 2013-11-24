@@ -8,7 +8,7 @@ var cache = require('reafilecache')()
 
 // read a file
 cache.readFile(filename, function(err, data, stat) {
-	returns the data from the file and the stat info
+  //returns the data from the file and the stat info
 })
 
 // clear the cache

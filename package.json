@@ -17,5 +17,12 @@
   "license": "MIT",
   "devDependencies": {
     "better-assert": "~1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/hij1nx/readfilecache.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hij1nx/readfilecache/issues"
   }
 }
