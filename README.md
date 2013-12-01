@@ -6,7 +6,7 @@ Returns data from fs.readFile or memory conditional on the mtime from an fs.stat
 //
 // create a cache instance
 //
-var cache = require('reafilecache')()
+var cache = require('readfilecache')()
 
 //
 // read a file, a call to the same path will return 
